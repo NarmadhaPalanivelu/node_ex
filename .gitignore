@@ -1,0 +1,10 @@
+/node_modules
+
+
+# Log files
+*.log
+logs/
+request.log
+
+package-lock.json
+
