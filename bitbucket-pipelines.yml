@@ -1,26 +1,33 @@
 # bitbucket-pipelines.yml
 
-image: node:20.10.0  # Use the Node.js 20 image
+image: node:20.10.0
 
 pipelines:
-  default:
-    - step:
-        name: Install and Test
-        caches:
-          - node
-        script:
-          - npm install          # Install dependencies
-          - npm run lint          # Run linter to check code quality
-          - npm run build              # Run tests with Jest
-
-  branches:
-    main:
+  pull-requests:
+    "**": #this runs as default for any branch not elsewhere defined
       - step:
-          name: Install, Test, and Deploy
+          name: Test and Code coverage
           caches:
             - node
           script:
-            - npm install
+            - npm install -D
             - npm run lint
             - npm run build
-           
+    develop: #this runs as default for any branch not elsewhere defined
+      - step:
+          name: Test and Code coverage
+          caches:
+            - node
+          script:
+            - npm install -D
+            - npm run lint
+            - npm run build
+    master: #this runs as default for any branch not elsewhere defined
+      - step:
+          name: Test and Code coverage
+          caches:
+            - node
+          script:
+            - npm install -D
+            - npm run lint
+            - npm run build
